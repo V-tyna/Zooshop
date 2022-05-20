@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
@@ -20,8 +20,9 @@ const Header = () => {
                         <NavLink className={setActiveLink} to='/other_animals'>Other animals</NavLink>
                     </nav>
                     <div className='header-btns'>
-                        <button>Sign In</button>
-                        <button>Sign Out</button>
+                        <Link className='sign' to='/signin'>Sign in</Link>
+                        <Link className='sign' to='/signup'>Sign up</Link>
+                        <button>Sign out</button>
                     </div>
                 </div>
                 <div id='search-sign-section'>

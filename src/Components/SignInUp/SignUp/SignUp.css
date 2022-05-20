@@ -1,0 +1,28 @@
+.register-form {
+    display: flex;
+    flex-flow: wrap column;
+    width: 500px;
+    justify-content: flex-start;
+}
+
+.register-form input, .register-form  label {
+    margin: 10px;
+}
+
+.register-form input:focus {
+    outline: none;
+}
+
+.register-form button {
+    width: 70px;
+    height: 30px;
+    margin: 10px;
+}
+
+.enabled {
+    border: 2px solid rgb(228, 225, 53); 
+}
+
+.disabled {
+   border: 2px solid rgb(197, 113, 147);
+}
