@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../index';
 import './SignUp.css';
 import { validateEmail, validatePassword, validateRepeatedPassword } from '../../../helpers/Validation';
 
@@ -24,7 +26,23 @@ const SignUp = () => {
     }
 
     const handlerRegister = () => {
-        console.log('Registered', email, password);
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                const user = userCredential.user;
+
+                document.cookie = `${'token'}=${user.accessToken}; expires=${new Date().getFullYear + 1}`
+
+                localStorage.setItem('Token', user.accessToken);
+                localStorage.setItem('Email', user.email);
+
+                console.log(user);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                throw new Error(errorCode, errorMessage);
+        });
     }
 
     const handleSubmit = (e) => {
