@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import './SignIn.css';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../index';
-import { validateEmail } from '../../../helpers/Validation';
-import { validatePassword } from '../../../helpers/Validation';
+import { validateEmail } from '../../../Helpers/Validation';
+import { validatePassword } from '../../../Helpers/Validation';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {

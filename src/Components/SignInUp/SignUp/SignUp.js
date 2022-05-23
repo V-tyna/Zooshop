@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../index';
 import './SignUp.css';
-import { validateEmail, validatePassword, validateRepeatedPassword } from '../../../helpers/Validation';
+import { validateEmail, validatePassword, validateRepeatedPassword } from '../../../Helpers/Validation';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
