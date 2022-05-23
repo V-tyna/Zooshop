@@ -6,8 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { initializeApp } from 'firebase/app'; 
-// import { getDatabase, ref, set } from 'firebase/database';
- import { getAuth } from 'firebase/auth';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const firebaseConfig = {
   apiKey: "AIzaSyBZd6A5dEUMLePwD3LifMdj_ODNW8Bd5wA",
@@ -20,24 +19,16 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
-console.log('Auth:', auth);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+    <React.StrictMode>
+      <BrowserRouter>
+          <App />
+      </BrowserRouter>
+    </React.StrictMode>
 );
 
-
-// Write to realtimeDB
-// function writeUserData(userId, name, email) {
-//   const db = getDatabase();
-//   set(ref(db, 'users/' + userId), {
-//       username: name,
-//       email: email,
-//   });
-// }
+onAuthStateChanged(auth, () => {})
 
 reportWebVitals();

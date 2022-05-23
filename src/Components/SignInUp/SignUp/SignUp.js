@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../index';
 import './SignUp.css';
 import { validateEmail, validatePassword, validateRepeatedPassword } from '../../../helpers/Validation';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
 
     let [email, setEmail] = useState(null);
     let [password, setPassword] = useState(null);
     let [repeatPassword, setRepeatPassword] = useState(null);
+
+    const navigation = useNavigate();
 
     const handlerInputEmail = (e) => {
         setEmail(email = e.target.value)
@@ -25,24 +28,26 @@ const SignUp = () => {
         validateRepeatedPassword(password, repeatPassword) ? e.target.className = 'enabled' : e.target.className = 'disabled'; 
     }
 
-    const handlerRegister = () => {
-        createUserWithEmailAndPassword(auth, email, password)
+    const handlerRegister = async () => {
+        await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // Signed in 
                 const user = userCredential.user;
-
-                document.cookie = `${'token'}=${user.accessToken}; expires=${new Date().getFullYear + 1}`
 
                 localStorage.setItem('Token', user.accessToken);
                 localStorage.setItem('Email', user.email);
 
-                console.log(user);
             })
             .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                throw new Error(errorCode, errorMessage);
+                throw new Error(error.message);
         });
+       
+           signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+            navigation('/')
+        })
+        .catch((error) => {
+            throw new Error (error.message);
+        })   
     }
 
     const handleSubmit = (e) => {

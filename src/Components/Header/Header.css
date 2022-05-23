@@ -88,6 +88,10 @@
     width: 70px;
 }
 
+.sign-links {
+    display: flex;
+}
+
 .header-btns button:hover, .sign:hover {
     background-color: rgb(197, 113, 147);
 }

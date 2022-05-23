@@ -1,0 +1,8 @@
+.email-label-container, .password-label-container {
+    display: flex;
+    align-items: center;
+}
+
+.email-label-container p, .password-label-container p {
+    color: red;
+}

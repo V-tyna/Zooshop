@@ -1,11 +1,23 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import './Header.css';
+import { auth } from '../..';
 
 const Header = () => {
 
+    const navigate = useNavigate();
+
+    const token = localStorage.getItem('Token');
+
     const setActiveLink = ({isActive}) => {
        return isActive ? 'main-header-link active-link' : 'main-header-link ';
+    }
+
+    const handlerSignOut = () => {
+        auth.signOut();
+        console.log('Sign out!');
+        navigate('/');
+        localStorage.removeItem('Token')
     }
 
     return (
@@ -20,9 +32,14 @@ const Header = () => {
                         <NavLink className={setActiveLink} to='/other_animals'>Other animals</NavLink>
                     </nav>
                     <div className='header-btns'>
-                        <Link className='sign' to='/signin'>Sign in</Link>
-                        <Link className='sign' to='/signup'>Sign up</Link>
-                        <button>Sign out</button>
+                        {
+                            token ?
+                            <button onClick={(handlerSignOut.bind(this))}>Sign out</button> :
+                            <div className='sign-links'>
+                                <Link id ='signin-link' className='sign' to='/signin'>Sign in</Link>
+                                <Link id ='signup-link' className='sign' to='/signup'>Sign up</Link>
+                            </div>  
+                        }
                     </div>
                 </div>
                 <div id='search-sign-section'>
