@@ -1,26 +1,32 @@
 import React, { useEffect, useState } from 'react';
+import ItemCard from '../ItemCard/ItemCard';
 import './OtherAnimals.css';
+
+const urlOA = 'https://zoo-shop-e14b4-default-rtdb.firebaseio.com/Other_Animals.json';
 
 const OtherAnimals = () => {
     let [obj, setData] = useState({});
 
-
-    
       useEffect(() => {
-            fetch('https://zoo-shop-e14b4-default-rtdb.firebaseio.com/Other_Animals.json')
-                .then(data => data.json())
-                .then(dataResp => {
-                    setData(dataResp)
-                }) 
+          const fetchData = async (url) => {
+            const response = await fetch(url);
+            const data = await response.json();
+            setData(data);
+          }
+
+          fetchData(urlOA)
+            .catch(e => {throw new Error('Fetch failed: ', e.message)})
       }, [])
-      console.log("Fetch: ", obj);
     
-        return ( 
+    return ( 
         <div>
-            <h1>OtherAnimals page</h1>
-            <p>{}</p>
+            <h1>Other Animals</h1>
+            <div  className="other-animal-page">
+                {Object.values(obj).map(item => {
+                return <ItemCard key={item.id} data={item}/>
+                })}
+            </div>
         </div> );
-    
 }
 
 export default OtherAnimals;

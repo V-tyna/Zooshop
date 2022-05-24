@@ -1,0 +1,17 @@
+
+.item-card {
+    display: flex;
+    flex-flow: wrap row;
+    justify-content: center;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 270px;
+    margin: 20px;
+    padding: 10px;
+}
+
+.item-card-image {
+    width: 250px;
+    height: 250px;
+}

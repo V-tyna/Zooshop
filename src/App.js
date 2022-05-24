@@ -18,13 +18,15 @@ function App() {
   return (
     <div>
       <Header />
-
+      
       <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/cats' element={<Cats />} />
           <Route path='/dogs' element={<Dogs />} />
           <Route path='/other_animals' element={<OtherAnimals />} />
-          <Route path=':id' element={<Item />} />
+          <Route path='/:animals/:id' element={<Item />} />
+          <Route path='/:animals/:category/:id' element={<Item />} />
+          <Route path='/:animals/:category/:specific/:id' element={<Item />} />
           <Route path='/signin' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
 
