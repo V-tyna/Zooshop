@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './Item.css';
-const firebaseUrl = 'https://zoo-shop-e14b4-default-rtdb.firebaseio.com';
-const currentLocation = window.location.pathname;
-const url = firebaseUrl + currentLocation + '.json';
-console.log("Url: ", url);
 
 const Item = () => {
+
+    const firebaseUrl = 'https://zoo-shop-e14b4-default-rtdb.firebaseio.com';
+    const currentLocation = window.location.pathname;
+    const url = firebaseUrl + currentLocation + '.json';
 
     const [item, setItem] = useState({});
 
@@ -18,7 +18,7 @@ const Item = () => {
 
           fetchData(url)
             .catch(e => {throw new Error('Fetch failed: ', e.message)})
-    }, []);
+    }, [url]);
 
     console.log('Specific Item: ', item);
 

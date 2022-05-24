@@ -1,6 +1,7 @@
 .other-animal-page {
     display: flex;
     margin-left: 40px;
+    flex-wrap: wrap;
 }
 
 h1 {

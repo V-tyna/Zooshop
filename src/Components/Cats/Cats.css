@@ -1,0 +1,42 @@
+ .cats-page {
+     margin: 50px;
+ }
+
+ .cats-page img {
+     width: 250px;
+     height: 250px;
+ }
+
+ .cats-page .nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+ }
+
+ .cats-page .main-header-link {
+    margin: 40px;
+    color: rgb(228, 225, 53); 
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    width: 300px;
+    height: 350px;
+}
+
+.cats-page .main-header-link:hover {
+    color: rgb(228, 225, 53); 
+    text-decoration: underline;
+    box-shadow: 5px 5px 5px rgb(228, 225, 53);
+}
+
+.cats-page  .active-link {
+    font-size: x-large;
+    color: rgb(233, 152, 184);
+}
+
+.cats-page .nav img {
+    height: 250px;
+    width: 250px;
+}

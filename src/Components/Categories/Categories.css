@@ -1,0 +1,16 @@
+.categories {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.categories-page {
+    display: flex;
+    margin-left: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}

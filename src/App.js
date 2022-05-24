@@ -13,6 +13,8 @@ import Basket from './Components/Basket/Basket';
 import UserProfile from './Components/UserProfile/UserProfile';
 import SignIn from './Components/SignInUp/SignIn/SignIn';
 import SignUp from './Components/SignInUp/SignUp/SignUp';
+import Categories from './Components/Categories/Categories';
+import Food from './Components/Categories/Food/Food';
 
 function App() {
   return (
@@ -22,9 +24,16 @@ function App() {
       <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/cats' element={<Cats />} />
+          <Route path='/cats' element={<Cats />} />
+          <Route path='/cats/food' element={<Food />} />
+          <Route path='/cats/food/:category' element={<Categories />} />
+          <Route path='/cats/:category' element={<Categories />} />
           <Route path='/dogs' element={<Dogs />} />
+          <Route path='/dogs/food' element={<Food />} />
+          <Route path='/dogs/food/:category' element={<Categories />} />
+          <Route path='/dogs/:category' element={<Categories />} />
           <Route path='/other_animals' element={<OtherAnimals />} />
-          <Route path='/:animals/:id' element={<Item />} />
+          <Route path='/other_animals/:id' element={<Item />} />
           <Route path='/:animals/:category/:id' element={<Item />} />
           <Route path='/:animals/:category/:specific/:id' element={<Item />} />
           <Route path='/signin' element={<SignIn />} />

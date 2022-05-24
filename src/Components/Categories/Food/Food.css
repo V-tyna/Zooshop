@@ -1,8 +1,8 @@
-.dogs-page {
+.food-page {
     margin: 50px;
 }
 
-.dogs-page .nav {
+.food-page .nav {
    display: flex;
    flex-direction: row;
    align-items: center;
@@ -10,7 +10,7 @@
    width: 100%;
 }
 
-.dogs-page .main-header-link {
+.food-page .main-header-link {
    margin: 40px;
    color: rgb(228, 225, 53); 
    text-align: center;
@@ -20,18 +20,18 @@
    height: 350px;
 }
 
-.dogs-page .main-header-link:hover {
+.food-page .main-header-link:hover {
    color: rgb(228, 225, 53); 
    text-decoration: underline;
    box-shadow: 5px 5px 5px rgb(228, 225, 53);
 }
 
-.dogs-page  .active-link {
+.food-page  .active-link {
    font-size: x-large;
    color: rgb(233, 152, 184);
 }
 
-.dogs-page .nav img {
+.food-page .nav img {
    height: 250px;
-   width: 250px;
+   width: 300px;
 }

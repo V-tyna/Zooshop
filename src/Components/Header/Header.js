@@ -2,16 +2,13 @@ import React from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import { auth } from '../..';
+import { setActiveClass } from '../../helpers/setActiveClass';
 
 const Header = () => {
 
     const navigate = useNavigate();
 
     const token = localStorage.getItem('Token');
-
-    const setActiveLink = ({isActive}) => {
-       return isActive ? 'main-header-link active-link' : 'main-header-link ';
-    }
 
     const handlerSignOut = () => {
         auth.signOut();
@@ -26,10 +23,10 @@ const Header = () => {
             <div id='header'>
                 <div id='link-section'>
                     <nav className="nav">
-                        <NavLink className={setActiveLink} to='/'>Home</NavLink>
-                        <NavLink className={setActiveLink} to='/cats'>Cats</NavLink>
-                        <NavLink className={setActiveLink} to='/dogs'>Dogs</NavLink>
-                        <NavLink className={setActiveLink} to='/other_animals'>Other animals</NavLink>
+                        <NavLink className={setActiveClass} to='/'>Home</NavLink>
+                        <NavLink className={setActiveClass} to='/cats'>Cats</NavLink>
+                        <NavLink className={setActiveClass} to='/dogs'>Dogs</NavLink>
+                        <NavLink className={setActiveClass} to='/other_animals'>Other animals</NavLink>
                     </nav>
                     <div className='header-btns'>
                         {

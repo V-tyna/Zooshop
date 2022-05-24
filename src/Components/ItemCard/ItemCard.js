@@ -14,6 +14,7 @@ const ItemCard = (props) => {
         const itemId = e.target.id;
         navigate(`/${props.data.category}/${itemId}`)
     }
+    // console.log('Props Item Card: ', props);
 
     return ( 
         <div className="item-card">
