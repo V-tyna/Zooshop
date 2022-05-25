@@ -14,13 +14,35 @@ const Item = () => {
             const response = await fetch(url);
             const data = await response.json();
             setItem(data);
-          }
+        }
 
-          fetchData(url)
+        fetchData(url)
             .catch(e => {throw new Error('Fetch failed: ', e.message)})
     }, [url]);
 
-    console.log('Specific Item: ', item);
+    console.log('Item: ', item);
+
+    const countPopularItems = () => {
+
+        const initialObjPopularItems = {};
+        const popItemsObj = JSON.parse(localStorage.getItem('Popular items'));
+        const writePopItemsToLS = (obj) => localStorage.setItem('Popular items' , JSON.stringify(obj));
+
+        if(item.id) {
+            if(!localStorage.getItem('Popular items')) {
+                initialObjPopularItems[item.category + '/' + item.id] = 1;
+                writePopItemsToLS(initialObjPopularItems)
+            } else if(!popItemsObj[item.category + '/' + item.id]) {
+                popItemsObj[item.category + '/' + item.id] = 1;
+                writePopItemsToLS(popItemsObj);
+            } else {
+                popItemsObj[item.category + '/' + item.id] += 1;
+                writePopItemsToLS(popItemsObj);
+            }
+        }
+    } 
+    
+    countPopularItems();
 
     return ( 
         <div>

@@ -20,8 +20,6 @@ const Categories = () => {
         fetchData(url)
           .catch(e => {throw new Error('Fetch failed: ', e.message)})
     }, [url])
-
-    console.log('Categories: ', dataFetch);
   
   return ( 
       <div className='categories'>
