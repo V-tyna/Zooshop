@@ -8,29 +8,21 @@ const PopularItems = () => {
 
     const [hits, setHits] = useState([]);
 
-    const popItemsByDefault = {'dogs/food/wet/0034': 3,'cats/food/dry/0001': 2,'other_animals/0047': 1, 'cats/toilets_fillers/0024': 1};
+    const popItemsByDefault = [['dogs/food/wet/0034', 3],['cats/food/dry/0001', 2],['other_animals/0047', 1], ['cats/toilets_fillers/0024', 1]];
     const popItemsFromLS = JSON.parse(localStorage.getItem('Popular items'));
-    const arrKeyVal = Object.entries(popItemsFromLS);
+    const arrKeyVal = (popItemsFromLS && Object.entries(popItemsFromLS)) || [];
 
     let popItems;
 
     if(arrKeyVal.length < 4) {
         popItems = popItemsByDefault;
     } else {
-        const sortedPopItemsFromLS = (bubbleSort(arrKeyVal).splice(0, 4));
-        popItems = sortedPopItemsFromLS;
+        popItems = (bubbleSort(arrKeyVal).splice(0, 4));
     }
 
     useEffect (() => { 
-        let currentUrls;
-        if(!Array.isArray(popItems)) {
-            currentUrls = Object.keys(popItems);
-        } else {
-            currentUrls = popItems.map(elem => elem[0]);
-        }
-        
-        Promise.all(currentUrls.map(url => {
-            return fetch(firebaseUrl + '/' + url + '.json')
+        Promise.all(popItems.map(el => {
+            return fetch(firebaseUrl + '/' + el[0] + '.json')
             .then(resp => resp.json())
         }))
         .then(result => setHits(result));
@@ -40,13 +32,19 @@ const PopularItems = () => {
     return (
         <div>
             <h2>Sales hits:</h2>
-            {  
-                hits.map(hit => {
-                    return (
-                        <div key={hit.id} className='hit'>{hit.name}</div>
-                    )
-                })
-            } 
+            <div  className='popular-items'>
+                {  
+                    hits.map(hit => {
+                        return (
+                                <div key={hit.id} className='hit'>
+                                    <p>{hit.name}</p>
+                                    <img className='populat-image' src={hit.image} alt={hit.name} />
+                                </div>   
+                        )
+                    })
+                }  
+            </div>
+            
         </div> 
     );
 }
