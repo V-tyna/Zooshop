@@ -12,9 +12,8 @@ const Header = () => {
 
     const handlerSignOut = () => {
         auth.signOut();
-        console.log('Sign out!');
         navigate('/');
-        localStorage.removeItem('Token')
+        localStorage.clear();
     }
 
     return (

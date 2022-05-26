@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Item.css';
 import { firebaseUrl } from '../../configs';
+import { addToFavOrBasket } from '../../helpers/eventListeners';
 
 const Item = () => {
 
@@ -19,8 +20,6 @@ const Item = () => {
         fetchData(url)
             .catch(e => {throw new Error('Fetch failed: ', e.message)})
     }, [url]);
-
-    console.log('Item: ', item);
 
     const countPopularItems = () => {
 
@@ -49,7 +48,7 @@ const Item = () => {
     return ( 
         <div id={item.category + '/' + item.id} className='item'>
             <h2>{item.name}</h2>
-            <button className='fav-btn'>To Fav</button>
+            <button className='fav-btn' onClick={addToFavOrBasket}>To Fav</button>
                 <div key={item.id} className='item-container'>
                     <img className='item-image' src={item.image} alt={item.name}/>
                     {keysVals.map(elem => {
@@ -63,7 +62,7 @@ const Item = () => {
                         return null;
                     })}
                 </div>
-                <button className='buy-btn'>Buy</button>
+                <button className='buy-btn' onClick={addToFavOrBasket}>Buy</button>
         </div>
     );
 }

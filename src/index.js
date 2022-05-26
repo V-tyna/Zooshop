@@ -13,6 +13,9 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+onAuthStateChanged(auth, () => {});
+
 root.render(
     // <React.StrictMode>
       <BrowserRouter>
@@ -20,7 +23,5 @@ root.render(
       </BrowserRouter>
     // </React.StrictMode>
 );
-
-onAuthStateChanged(auth, () => {})
 
 reportWebVitals();

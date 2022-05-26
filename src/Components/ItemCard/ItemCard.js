@@ -7,10 +7,6 @@ const ItemCard = (props) => {
 
     const navigate = useNavigate();
 
-    if(props.length) {
-        console.log(Object.keys(props.data));
-    }
-
     const handlerWatchItem = (e) => {
         navigate(`/${e.target.parentNode.id}`)
     }

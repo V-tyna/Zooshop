@@ -1,13 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../..';
 import './PrivateRouter.css';
 
 const PrivateRoute = (props) =>  {
+    const token = localStorage.getItem('Token')
     const navigation = useNavigate()
     return ( 
         <div className='private-router'>
-            {auth.currentUser ? props.component : <div> <h3>Please Sign in:</h3><button onClick={() => navigation('/signin')}>Sign in</button> </div> }
+            {token ? props.component : <div> <h3>Please Sign in:</h3><button className='router-btn' onClick={() => navigation('/signin')}>Sign in</button> </div> }
         </div> 
     );
 }

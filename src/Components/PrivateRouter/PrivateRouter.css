@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-.private-router button {
+.router-btn {
     color: white;
     background-color: rgb(247, 199, 89);
     padding: 5px;
@@ -15,6 +15,6 @@
     cursor: pointer;
 }
 
-.private-router button:hover {
+.router-btn:hover {
     background-color: rgb(219, 164, 33);
 }

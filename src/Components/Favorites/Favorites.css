@@ -4,4 +4,24 @@
 
 .user-menu p {
     text-align: center;
+    margin-right: 15px;
+}
+
+.fav-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin-bottom: 10px;
+}
+
+.fav-container img {
+    height: 75px;
+}
+
+.fav-img-name, .fav-price-btn{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }

@@ -38,7 +38,6 @@ const SignIn = () => {
             })
             .catch((error) => {
                 const errorCode = error.code;
-                console.log('Error code: ', errorCode);
                 if(errorCode === 'auth/wrong-password') {
                     setPasswordErr(passwordErr = true);
                 }
