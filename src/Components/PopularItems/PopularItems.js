@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './PopularItems.css';
 import { bubbleSort } from '../../helpers/sortingFunction';
-
-const firebaseUrl = 'https://zoo-shop-e14b4-default-rtdb.firebaseio.com';
+import ItemCard from '../ItemCard/ItemCard';
+import { firebaseUrl } from '../../configs';
 
 const PopularItems = () => {
 
@@ -30,16 +30,13 @@ const PopularItems = () => {
     }, [])
 
     return (
-        <div>
+        <div className='pop-items-container'>
             <h2>Sales hits:</h2>
             <div  className='popular-items'>
                 {  
                     hits.map(hit => {
                         return (
-                                <div key={hit.id} className='hit'>
-                                    <p>{hit.name}</p>
-                                    <img className='populat-image' src={hit.image} alt={hit.name} />
-                                </div>   
+                            <ItemCard key={hit.id} data={hit} />
                         )
                     })
                 }  

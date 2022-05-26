@@ -2,10 +2,12 @@ import React from 'react';
 import './Favorites.css';
 
 const Favorites = () => {
+
     return ( 
-    <div>
-        <h1>Favorites Page</h1>
-    </div> 
+        <div className='user-menu'>
+            <h1>Favourite page</h1>
+            <p>You can see this page because you are logged in!</p>
+        </div> 
     );
 }
  

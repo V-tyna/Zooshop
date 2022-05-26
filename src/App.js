@@ -15,6 +15,7 @@ import SignIn from './Components/SignInUp/SignIn/SignIn';
 import SignUp from './Components/SignInUp/SignUp/SignUp';
 import Categories from './Components/Categories/Categories';
 import Food from './Components/Categories/Food/Food';
+import PrivateRoute from './Components/PrivateRouter/PrivateRouter';
 
 function App() {
     return (
@@ -39,9 +40,9 @@ function App() {
                 <Route path='/signin' element={<SignIn />} />
                 <Route path='/signup' element={<SignUp />} />
 
-                <Route path='/favorites' element={<Favorites />} />
-                <Route path='/basket' element={<Basket />} />
-                <Route path='/user_profile' element={<UserProfile />} />
+                <Route path='/favorites' element={<PrivateRoute component={<Favorites />} />} />
+                <Route path='/basket' element={<PrivateRoute component={<Basket />} />} />
+                <Route path='/user_profile' element={<PrivateRoute component={<UserProfile />} />} />
 
                 <Route path='*' element={<h1 style={{color: 'red', textAlign: 'center'}}>404 Page not found</h1>} />
             </Routes>

@@ -1,0 +1,20 @@
+.private-router {
+    text-align: center;
+}
+
+.private-router button {
+    color: white;
+    background-color: rgb(247, 199, 89);
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 20px;
+    height: 30px;
+    width: 70px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.private-router button:hover {
+    background-color: rgb(219, 164, 33);
+}

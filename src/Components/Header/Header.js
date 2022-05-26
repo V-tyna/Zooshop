@@ -45,7 +45,9 @@ const Header = () => {
                         <button> Search </button>
                     </div>
                     <div className='user-fav-basket'>
-                        User Fav Basket
+                        <Link className='user-link' to='/user_profile'>User</Link>
+                        <Link className='user-link' to='/favorites'>Fav</Link>
+                        <Link className='user-link' to='/basket'>Basket</Link>
                     </div>
                 </div>
             </div>

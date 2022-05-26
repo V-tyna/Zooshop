@@ -6,4 +6,6 @@ export const firebaseConfig = {
     messagingSenderId: "28690138419",
     appId: "1:28690138419:web:77d60fb0fc87b3c1606a46"
   };
+
+  export const firebaseUrl = 'https://zoo-shop-e14b4-default-rtdb.firebaseio.com';
   

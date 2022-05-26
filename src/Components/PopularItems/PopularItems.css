@@ -1,4 +1,8 @@
-.populat-image {
-    width: 300px;
-    height: 300px;
+.pop-items-container {
+    text-align: center;
+}
+
+.popular-items {
+    display: flex;
+    justify-content: center;
 }

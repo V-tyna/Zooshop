@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './Item.css';
+import { firebaseUrl } from '../../configs';
 
 const Item = () => {
 
-    const firebaseUrl = 'https://zoo-shop-e14b4-default-rtdb.firebaseio.com';
     const currentLocation = window.location.pathname;
     const url = firebaseUrl + currentLocation + '.json';
 
@@ -44,13 +44,26 @@ const Item = () => {
     
     countPopularItems();
 
+    const keysVals = item && Object.entries(item);
+
     return ( 
-        <div>
-            <h1>Item page</h1>
-                <div key={item.id}>
-                    <img className="item-image" src={item.image} alt={item.name}/>
-                    <p>{item.name}</p>
+        <div id={item.category + '/' + item.id} className='item'>
+            <h2>{item.name}</h2>
+            <button className='fav-btn'>To Fav</button>
+                <div key={item.id} className='item-container'>
+                    <img className='item-image' src={item.image} alt={item.name}/>
+                    {keysVals.map(elem => {
+                        if(elem[0] !== 'image' && elem[0] !== 'category' && elem[0] !== 'id') {
+                            return (
+                                <div className='item-info' key={elem[0]}>
+                                    <strong>{elem[0]}: &nbsp; </strong> <p> {elem[1]}</p>
+                                </div>
+                            )
+                        }
+                        return null;
+                    })}
                 </div>
+                <button className='buy-btn'>Buy</button>
         </div>
     );
 }

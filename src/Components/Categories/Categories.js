@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ItemCard from '../ItemCard/ItemCard';
 import './Categories.css';
+import { firebaseUrl } from '../../configs';
 
 const Categories = () => {
 
-    const firebaseUrl = 'https://zoo-shop-e14b4-default-rtdb.firebaseio.com';
+    
     const currentLocation = window.location.pathname;
     const url = firebaseUrl + currentLocation + '.json';
 

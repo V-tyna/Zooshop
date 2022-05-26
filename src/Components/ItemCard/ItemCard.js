@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ItemCard.css';
+import { addToFavOrBasket } from '../../helpers/eventListeners';
 
 const ItemCard = (props) => {
 
@@ -11,16 +12,16 @@ const ItemCard = (props) => {
     }
 
     const handlerWatchItem = (e) => {
-        const itemId = e.target.id;
-        navigate(`/${props.data.category}/${itemId}`)
+        navigate(`/${e.target.parentNode.id}`)
     }
-    // console.log('Props Item Card: ', props);
 
     return ( 
-        <div className="item-card">
+        <div className='item-card' id={props.data.category + '/' + props.data.id} >
             <h3>{props.data.name}</h3>
-            <img className="item-card-image" src={props.data.image} alt={props.data.name}/>
-            <button id={props.data.id} onClick={handlerWatchItem.bind(this)}>Watch more</button>
+            <button className='fav-btn' onClick={addToFavOrBasket}>To Fav</button>
+            <img className='item-card-image' src={props.data.image} alt={props.data.name}/>
+            <button className='watch-btn' onClick={handlerWatchItem.bind(this)}>Watch more</button>
+            <button className='buy-btn' onClick={addToFavOrBasket}>Buy</button>
         </div> 
      );
 }
