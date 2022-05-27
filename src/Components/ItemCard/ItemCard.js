@@ -15,7 +15,10 @@ const ItemCard = (props) => {
         <div className='item-card' id={props.data.category + '/' + props.data.id} >
             <h3>{props.data.name}</h3>
             <button className='fav-btn' onClick={addToFavOrBasket}>To Fav</button>
-            <img className='item-card-image' src={props.data.image} alt={props.data.name}/>
+            <div>
+               <img className='item-card-image' src={props.data.image} alt={props.data.name}/>
+            <p>Price: {props.data.price}</p> 
+            </div>
             <button className='watch-btn' onClick={handlerWatchItem.bind(this)}>Watch more</button>
             <button className='buy-btn' onClick={addToFavOrBasket}>Buy</button>
         </div> 

@@ -1,0 +1,13 @@
+.pagination-page h2 {
+    text-align: center;
+}
+
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pagination .item-card {
+    margin-left: 50px;
+}
