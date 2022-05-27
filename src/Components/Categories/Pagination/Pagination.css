@@ -11,3 +11,29 @@
 .pagination .item-card {
     margin-left: 50px;
 }
+
+.pagination-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prev-next {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    color: white;
+    background-color: rgb(233, 152, 184);
+    padding: 5px;
+    border-radius: 5px;
+    height: 25px;
+    width: 75px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.prev-next:hover {
+    background-color: rgb(197, 113, 147);
+}
