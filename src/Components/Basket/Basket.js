@@ -17,7 +17,7 @@ const Basket = () => {
     const handlerDelete = (e) => {
         const obj = {};
         basketArr = basketArr.filter(elem => elem.id !== e.target.parentNode.parentNode.id);  
-        basketArr.map(elem => obj[elem.id] = elem);
+        basketArr.forEach(elem => obj[elem.id] = elem);
 
         localStorage.setItem('Basket', JSON.stringify(obj));
         setIsDeleted(!isDeleted);
@@ -47,7 +47,8 @@ const Basket = () => {
     <div className='user-menu'>
         <h1>Basket Page</h1>
         { basket ? basketArr.map(elem => {
-            total += elem.quantity ? +elem.price.replace('$', '').replace(',', '.') * elem.quantity : +elem.price.replace('$', '').replace(',', '.');
+            const price =  +elem.price.replace('$', '').replace(',', '.');
+            total += elem.quantity ? price * elem.quantity : price;
                 return (
                     <div id={elem.id} key={elem.id} className='fav-container'>
                         <div className='fav-img-name'>
@@ -56,9 +57,8 @@ const Basket = () => {
                             <p>{elem.name} </p>   
                         </div>
                        <div id={elem.category + '/' + elem.id} className='fav-price-btn'>
-                           <p>{elem.quantity ? (+elem.price.replace('$', '').replace(',', '.') * elem.quantity).toFixed(2).toString() + '$' : elem.price}</p>
-                           <p>Qantity: </p>
-                           <p>{elem.quantity || 1}</p>
+                           <p>{elem.quantity ? (price * elem.quantity).toFixed(2).toString() + '$' : elem.price}</p>
+                           <p>Qantity: {elem.quantity || 1}</p>
                            <button className='plus-minus-btn' onClick={handlerQantityPlus}>+</button>
                            <button className='plus-minus-btn' onClick={handlerQantityMinus}>-</button>
                            <button className='watch-btn' onClick={handlerDelete}>Delete</button>

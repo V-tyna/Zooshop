@@ -3,10 +3,7 @@ import Categories from '../Categories/Categories';
 import './OtherAnimals.css';
 
 const OtherAnimals = () => {
-    
-    return ( 
-        <Categories />
-        );
-}
+	return <Categories />;
+};
 
 export default OtherAnimals;

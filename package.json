@@ -23,6 +23,10 @@
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "indent": [
+      true,
+      "spaces"
     ]
   },
   "browserslist": {

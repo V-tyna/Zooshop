@@ -6,7 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { firebaseConfig } from './configs';
 
-import { initializeApp } from 'firebase/app'; 
+import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 const app = initializeApp(firebaseConfig);
@@ -17,11 +17,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 onAuthStateChanged(auth, () => {});
 
 root.render(
-    // <React.StrictMode>
-      <BrowserRouter>
-          <App />
-      </BrowserRouter>
-    // </React.StrictMode>
+	<BrowserRouter>
+		<App />
+	</BrowserRouter>
 );
 
 reportWebVitals();
