@@ -16,10 +16,10 @@ const Pagination = () => {
 
 	useEffect(() => {
 		Promise.all(
-			urls.map((url) => {
-				return fetch(`${firebaseUrl}${url}.json`)
-					.then((response) => response.json())
-					.then((data) => Object.values(data));
+			urls.map(async (url) => {
+				const response = await fetch(`${firebaseUrl}${url}.json`);
+				const data =  await response.json();
+				return Object.values(data);
 			})
 		).then((results) => setAllGoods(results))
 		.catch(e => console.error(e.message))

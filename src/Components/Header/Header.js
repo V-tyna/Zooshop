@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import { auth } from '../..';
 import { setActiveClass } from '../../helpers/setActiveClass';
+import { popUpRender } from '../../helpers/popUpRender';
 
 const Header = () => {
 
     const navigate = useNavigate();
+    const [countFavs, setCountFavs] = useState(0);
+    const [countBask, setCountBask] = useState(0);
 
     const token = localStorage.getItem('Token');
+    const favs = JSON.parse(localStorage.getItem('Favorites'));
+    const bask = JSON.parse(localStorage.getItem('Basket'));
+
+    useEffect(() => {
+        if(favs) setCountFavs(Object.keys(favs).length);
+        if(bask) setCountBask(Object.keys(bask).length);
+    }, [favs, bask])
+    
 
     const handlerSignOut = () => {
         auth.signOut();
+        popUpRender('<strong>You\'ve successfully sign out!</strong>')
         navigate('/');
         localStorage.clear();
     }
@@ -30,7 +42,7 @@ const Header = () => {
                     <div className='header-btns'>
                         {
                             token ?
-                            <button onClick={(handlerSignOut.bind(this))}>Sign out</button> :
+                            <button onClick={(handlerSignOut)}>Sign out</button> :
                             <div className='sign-links'>
                                 <Link id ='signin-link' className='sign' to='/signin'>Sign in</Link>
                                 <Link id ='signup-link' className='sign' to='/signup'>Sign up</Link>
@@ -45,8 +57,14 @@ const Header = () => {
                     </div>
                     <div className='user-fav-basket'>
                         <Link className='user-link' to='/user_profile'>User</Link>
-                        <Link className='user-link' to='/favorites'>Fav</Link>
-                        <Link className='user-link' to='/basket'>Basket</Link>
+                        <Link className='user-link' to='/favorites'>
+                            { countFavs ? <div className='count-fav'>{countFavs}</div> : <div className='count-fav'>0</div> }
+                            <div className='text-fav'>Fav</div>
+                        </Link>
+                        <Link className='user-link-basket' to='/basket'>
+                            { countBask ? <div className='count-bask'>{countBask}</div> : <div className='count-bask'>0</div> }
+                            <div className='text-bask'>Basket</div>
+                        </Link>
                     </div>
                 </div>
             </div>

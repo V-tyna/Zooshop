@@ -1,4 +1,5 @@
 import { firebaseUrl } from '../urls/mainUrlDB';
+import { popUpRender } from './popUpRender';
 
 export const addToFavOrBasket = async (e) => {
 	const response = await fetch(
@@ -22,4 +23,13 @@ export const addToFavOrBasket = async (e) => {
 		favFromLS[favObj.id] = favObj;
 		writeFavsToLS(favFromLS);
 	}
+
+	let phrase;
+	if( key === 'Favorites') {
+		phrase = 'Item was added to <strong>Favorites</strong>!';
+	} else {
+		phrase = 'Item was added to the <strong>Basket</strong>!';
+	}
+
+	popUpRender(phrase);
 };

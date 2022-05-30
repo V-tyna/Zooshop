@@ -21,12 +21,11 @@ const PopularItems = () => {
 
 	useEffect(() => {
 		Promise.all(
-			popItems.map((el) => {
-				return fetch(firebaseUrl + '/' + el[0] + '.json').then((resp) =>
-					resp.json()
-				);
+			popItems.map(async (el) => {
+				const response = await fetch(firebaseUrl + '/' + el[0] + '.json');
+				return await response.json();
 			})
-		).then((result) => setHits(result));
+		).then((results) => setHits(results));
 		// eslint-disable-next-line
 	}, []);
 

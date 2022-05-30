@@ -10,13 +10,14 @@ import {
 	validatePassword,
 	validateRepeatedPassword,
 } from '../../../helpers/Validation';
+import { popUpRender } from '../../../helpers/popUpRender';
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
-	let [email, setEmail] = useState(null);
-	let [password, setPassword] = useState(null);
-	let [, setRepeatPassword] = useState(null);
-	let [disableStatus, setDisableStatus] = useState(true);
+	const [email, setEmail] = useState(null);
+	const [password, setPassword] = useState(null);
+	const [, setRepeatPassword] = useState(null);
+	const [disableStatus, setDisableStatus] = useState(true);
 
 	const navigation = useNavigate();
 
@@ -53,6 +54,8 @@ const SignUp = () => {
 
 					localStorage.setItem('Token', user.accessToken);
 					localStorage.setItem('Email', user.email);
+					
+					popUpRender('<strong>You\'ve successfully registered!</strong>')
 				}
 			);
 		} catch (error) {

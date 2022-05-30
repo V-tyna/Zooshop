@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../../index';
 import { validateEmail } from '../../../helpers/Validation';
 import { validatePassword } from '../../../helpers/Validation';
+import { popUpRender } from '../../../helpers/popUpRender';
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
@@ -44,6 +45,7 @@ const SignIn = () => {
 		signInWithEmailAndPassword(auth, email, password)
 			.then((user) => {
 				localStorage.setItem('Token', auth.currentUser.accessToken);
+				popUpRender('<strong>You\'ve successfully sign in!</strong>')
 				navigate('/');
 			})
 			.catch((error) => {
