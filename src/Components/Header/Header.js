@@ -1,24 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import { auth } from '../..';
 import { setActiveClass } from '../../helpers/setActiveClass';
 import { popUpRender } from '../../helpers/popUpRender';
+import { connect } from 'react-redux';
+import { basketAction, favoritesAction } from '../../redux/actions';
+import { store } from '../..';
 
-const Header = () => {
+const Header = (props) => {
+    console.log('Counter state: ', props);
+    console.log('Counter store: ', store.getState().favIconReducer.favCounter);
 
     const navigate = useNavigate();
-    const [countFavs, setCountFavs] = useState(0);
-    const [countBask, setCountBask] = useState(0);
 
     const token = localStorage.getItem('Token');
-    const favs = JSON.parse(localStorage.getItem('Favorites'));
-    const bask = JSON.parse(localStorage.getItem('Basket'));
+    // const favs = JSON.parse(localStorage.getItem('Favorites'));
+    // const bask = JSON.parse(localStorage.getItem('Basket'));
 
-    useEffect(() => {
-        if(favs) setCountFavs(Object.keys(favs).length);
-        if(bask) setCountBask(Object.keys(bask).length);
-    }, [favs, bask])
+    // let numFav;
+    // let numBask;
+
+    // if(favs) {
+    //     numFav = Object.keys(favs).length;
+    //     props.favoriteCount(numFav);
+    // }
+    // if(bask) {
+    //     numBask = Object.keys(bask).length;
+    // }
     
 
     const handlerSignOut = () => {
@@ -58,11 +67,11 @@ const Header = () => {
                     <div className='user-fav-basket'>
                         <Link className='user-link' to='/user_profile'>User</Link>
                         <Link className='user-link' to='/favorites'>
-                            { countFavs ? <div className='count-fav'>{countFavs}</div> : <div className='count-fav'>0</div> }
+                            { props.favCount ? <div className='count-fav'>{props.favCount}</div> : <div className='count-fav'>0</div> }
                             <div className='text-fav'>Fav</div>
                         </Link>
                         <Link className='user-link-basket' to='/basket'>
-                            { countBask ? <div className='count-bask'>{countBask}</div> : <div className='count-bask'>0</div> }
+                            { props.baskCount ? <div className='count-bask'>{props.baskCount}</div> : <div className='count-bask'>0</div> }
                             <div className='text-bask'>Basket</div>
                         </Link>
                     </div>
@@ -73,4 +82,19 @@ const Header = () => {
     )
 }
 
-export default Header;
+const mapStateProps = (state) => {
+    console.log('map' , state);
+    return {
+        favCount: state.favIconReducer.favCounter,
+        baskCount: state.baskIconReducer.baskCounter
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        favoriteCount: (num = 0) => dispatch(favoritesAction()),
+        basketCount: (num = 0) => dispatch(basketAction())
+    }
+}
+
+export default connect(mapStateProps, mapDispatchToProps)(Header);

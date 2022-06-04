@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { store } from '../..';
+import { basketAction } from '../../redux/actions';
 import './Basket.css';
 
 const Basket = () => {
@@ -20,6 +22,7 @@ const Basket = () => {
         basketArr.forEach(elem => obj[elem.id] = elem);
 
         localStorage.setItem('Basket', JSON.stringify(obj));
+        store.dispatch(basketAction(basketArr.length));
         setIsDeleted(!isDeleted);
     }
 
@@ -38,8 +41,9 @@ const Basket = () => {
             basket[e.target.parentNode.parentNode.id].quantity--;
         } else {
             delete basket[e.target.parentNode.parentNode.id];
+            store.dispatch(basketAction(Object.keys(basket).length));
         }
-        localStorage.setItem('Basket', JSON.stringify(basket));
+        localStorage.setItem('Basket', JSON.stringify(basket));  
         setIsDeleted(!isDeleted);
     }
 

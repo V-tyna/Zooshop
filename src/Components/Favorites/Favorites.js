@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { store } from '../..';
 import { addToFavOrBasket } from '../../helpers/eventListeners';
 import './Favorites.css';
+import { favoritesAction } from '../../redux/actions';
 
 const Favorites = () => {
 
@@ -20,6 +22,7 @@ const Favorites = () => {
         favArr.map(elem => obj[elem.id] = elem);
 
         localStorage.setItem('Favorites', JSON.stringify(obj));
+        store.dispatch(favoritesAction(favArr.length));
         setIsDeleted(!isDeleted);
     }
 
