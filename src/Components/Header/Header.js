@@ -6,29 +6,12 @@ import { setActiveClass } from '../../helpers/setActiveClass';
 import { popUpRender } from '../../helpers/popUpRender';
 import { connect } from 'react-redux';
 import { basketAction, favoritesAction } from '../../redux/actions';
-import { store } from '../..';
 
 const Header = (props) => {
-    console.log('Counter state: ', props);
-    console.log('Counter store: ', store.getState().favIconReducer.favCounter);
 
     const navigate = useNavigate();
 
     const token = localStorage.getItem('Token');
-    // const favs = JSON.parse(localStorage.getItem('Favorites'));
-    // const bask = JSON.parse(localStorage.getItem('Basket'));
-
-    // let numFav;
-    // let numBask;
-
-    // if(favs) {
-    //     numFav = Object.keys(favs).length;
-    //     props.favoriteCount(numFav);
-    // }
-    // if(bask) {
-    //     numBask = Object.keys(bask).length;
-    // }
-    
 
     const handlerSignOut = () => {
         auth.signOut();
@@ -83,7 +66,6 @@ const Header = (props) => {
 }
 
 const mapStateProps = (state) => {
-    console.log('map' , state);
     return {
         favCount: state.favIconReducer.favCounter,
         baskCount: state.baskIconReducer.baskCounter

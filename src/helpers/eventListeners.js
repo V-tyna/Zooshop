@@ -3,6 +3,20 @@ import { popUpRender } from './popUpRender';
 import { store } from '..';
 import { baskType, favType } from '../redux/actionTypes';
 
+const writeFavsToLS = (obj, key) =>
+localStorage.setItem(key, JSON.stringify(obj));
+
+const dispatchType = (obj, key) => {
+	let type;
+if(key === 'Favorites') {
+	type = favType;
+}
+if(key === 'Basket') {
+	type = baskType;
+}
+store.dispatch({type: type, payload: Object.keys(obj).length})
+}	
+
 export const addToFavOrBasket = async (e) => {
 	const response = await fetch(
 		`${firebaseUrl}/${e.target.parentNode.id}.json`
@@ -15,27 +29,13 @@ export const addToFavOrBasket = async (e) => {
 	const initialFav = {};
 	const objFromLS = JSON.parse(localStorage.getItem(key));
 
-	const writeFavsToLS = (obj) =>
-		localStorage.setItem(key, JSON.stringify(obj));
-
-	const dispatchType = (type) => {
-		if(key === 'Favorites') {
-			type = favType;
-		}
-		if(key === 'Basket') {
-			type = baskType;
-		}
-		store.dispatch({type: type, payload: Object.keys(objFromLS).length})
-	}	
-
 	if (!objFromLS) {
 		initialFav[favObj.id] = favObj;
-		writeFavsToLS(initialFav);
+		writeFavsToLS(initialFav, key);
 	} else {
 		objFromLS[favObj.id] = favObj;
-		writeFavsToLS(objFromLS);
-		console.log(Object.keys(objFromLS).length);
-		dispatchType();
+		writeFavsToLS(objFromLS, key);
+		dispatchType(objFromLS, key);
 	}
 
 	let phrase;
