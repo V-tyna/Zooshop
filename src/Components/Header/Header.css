@@ -212,3 +212,20 @@
     height: 25px;
     border-radius: 50%;
 }
+
+#logo {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.logo-image {
+    width: 85px;
+}
+
+#logo p {
+    transform: rotate(270deg);
+    color: rgb(233, 152, 184);
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+    font-size: 18px;
+}

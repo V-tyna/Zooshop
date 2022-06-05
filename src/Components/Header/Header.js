@@ -24,7 +24,14 @@ const Header = (props) => {
 
     return (
         <div id='header-root'>
-            <div id='logo'>Logo</div>
+            <Link to='/' id='logo'>
+            <p>Home</p>
+                <img  
+                    className='logo-image'
+                    src='https://firebasestorage.googleapis.com/v0/b/zoo-shop-e14b4.appspot.com/o/logo_free-file.png?alt=media&token=b1d730a5-3b87-4b51-8bde-06ed5a5efeb0'
+                    alt='Logo pet pow' 
+                />
+            </Link>
             <div id='header'>
                 <div id='link-section'>
                     <nav className='nav'>
