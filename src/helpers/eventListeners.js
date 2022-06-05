@@ -32,6 +32,7 @@ export const addToFavOrBasket = async (e) => {
 	if (!objFromLS) {
 		initialFav[favObj.id] = favObj;
 		writeFavsToLS(initialFav, key);
+		dispatchType(initialFav, key)
 	} else {
 		objFromLS[favObj.id] = favObj;
 		writeFavsToLS(objFromLS, key);

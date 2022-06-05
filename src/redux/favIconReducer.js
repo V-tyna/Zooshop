@@ -1,4 +1,4 @@
-import { delType, favType } from './actionTypes';
+import { clearFavStateType, favType } from './actionTypes';
 
 const countFromLS = Object.keys(JSON.parse(localStorage.getItem('Favorites')) || {}).length;
 
@@ -13,11 +13,11 @@ export const favIconReducer = (state = initialState, action) => {
            favCounter: action.payload
         }
     }
-    if(action.type === delType) {
+    if(action.type === clearFavStateType) {
         return {
             ...state,
-            favCounter: action.payload
-         }
+            favCounter: 0
+        }
     }
 
     return state;

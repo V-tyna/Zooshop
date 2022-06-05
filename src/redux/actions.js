@@ -13,3 +13,9 @@ export const basketAction = (num) => {
         payload: num
     }
 }
+
+export const clearStateAction = (type) => {
+    return {
+        type: type
+    }
+}

@@ -5,19 +5,22 @@ import { auth } from '../..';
 import { setActiveClass } from '../../helpers/setActiveClass';
 import { popUpRender } from '../../helpers/popUpRender';
 import { connect } from 'react-redux';
-import { basketAction, favoritesAction } from '../../redux/actions';
+import { clearStateAction } from '../../redux/actions';
+import { clearBaskStateType, clearFavStateType } from '../../redux/actionTypes';
 
 const Header = (props) => {
-
+    console.log(props);
     const navigate = useNavigate();
 
     const token = localStorage.getItem('Token');
 
     const handlerSignOut = () => {
         auth.signOut();
-        popUpRender('<strong>You\'ve successfully sign out!</strong>')
+        popUpRender('<strong>You\'ve successfully sign out!</strong>');
         navigate('/');
         localStorage.clear();
+        props.clearFavCount();
+        props.clearBaskCount();
     }
 
     return (
@@ -25,7 +28,7 @@ const Header = (props) => {
             <div id='logo'>Logo</div>
             <div id='header'>
                 <div id='link-section'>
-                    <nav className="nav">
+                    <nav className='nav'>
                         <NavLink className={setActiveClass} to='/'>Home</NavLink>
                         <NavLink className={setActiveClass} to='/cats'>Cats</NavLink>
                         <NavLink className={setActiveClass} to='/dogs'>Dogs</NavLink>
@@ -74,8 +77,8 @@ const mapStateProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        favoriteCount: (num = 0) => dispatch(favoritesAction()),
-        basketCount: (num = 0) => dispatch(basketAction())
+        clearFavCount: () => dispatch(clearStateAction(clearFavStateType)),
+        clearBaskCount: () => dispatch(clearStateAction(clearBaskStateType))
     }
 }
 

@@ -1,4 +1,4 @@
-import { baskType } from './actionTypes';
+import { baskType, clearBaskStateType } from './actionTypes';
 
 const countFromLS = Object.keys(JSON.parse(localStorage.getItem('Basket')) || {}).length;
 
@@ -11,6 +11,12 @@ export const baskIconReducer = (state = initialState, action) => {
         return {
            ...state,
            baskCounter: action.payload
+        }
+    }
+    if(action.type === clearBaskStateType) {
+        return {
+            ...state,
+            baskCounter: 0
         }
     }
 
