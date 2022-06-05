@@ -9,7 +9,6 @@ import { clearStateAction } from '../../redux/actions';
 import { clearBaskStateType, clearFavStateType } from '../../redux/actionTypes';
 
 const Header = (props) => {
-    console.log(props);
     const navigate = useNavigate();
 
     const token = localStorage.getItem('Token');
