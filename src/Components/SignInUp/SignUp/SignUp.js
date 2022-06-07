@@ -53,13 +53,8 @@ const SignUp = () => {
 			localStorage.setItem('Token', userCredential.user.accessToken);
 			localStorage.setItem('Email', email);
 			
-			popUpRender('Registered')
+			popUpRender('Registered');
 				
-		} catch(error) {
-			throw new Error(error.message);
-		}
-
-		try {
 			await signInWithEmailAndPassword(auth, email, password);
 			navigation('/');
 		} catch(error) {

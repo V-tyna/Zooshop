@@ -7,13 +7,8 @@ const writeFavsToLS = (obj, key) =>
 	localStorage.setItem(key, JSON.stringify(obj));
 
 const dispatchType = (obj, key) => {
-	let type;
-	if (key === 'Favorites') {
-		type = favType;
-	}
-	if (key === 'Basket') {
-		type = baskType;
-	}
+	const type = key === 'Favorites' ? favType : baskType;
+
 	store.dispatch({ type: type, payload: Object.keys(obj).length });
 };
 
