@@ -2,7 +2,7 @@
 
 Pet project React App
 
-## You cat try it by the link - https://zoo-shop-e14b4.web.app
+## You can try it by the link - https://zoo-shop-e14b4.web.app
 *Notice*: To see pages UserProfile, Favorites and Basket you need to be registered on the site. You may use mock email and password.
 Or use existed profile to sign in: 
 Login - v@gmail.com
