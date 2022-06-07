@@ -1,0 +1,10 @@
+.note {
+    font-family: 'Courier New', Courier, monospace;
+    margin-bottom: 20px;
+}
+
+.email-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

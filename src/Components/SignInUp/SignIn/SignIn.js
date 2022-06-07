@@ -19,7 +19,7 @@ const SignIn = () => {
 	const clearingErrNotification = () => {
 		setEmailErr(false);
 		setPasswordErr(false);
-	}
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -28,35 +28,36 @@ const SignIn = () => {
 	const handlerInputEmail = (e) => {
 		clearingErrNotification();
 		setEmail((email = e.target.value));
-		validateEmail(email)
-			? (e.target.className = 'enabled')
-			: (e.target.className = 'disabled');
+		e.target.className = validateEmail(e.target.value)
+			? 'enabled'
+			: 'disabled';
 	};
 
 	const handlerInputPassword = (e) => {
 		clearingErrNotification();
 		setPassword((password = e.target.value));
-		validatePassword(password)
-			? (e.target.className = 'enabled')
-			: (e.target.className = 'disabled');
+		e.target.className = validatePassword(e.target.value)
+			? 'enabled'
+			: 'disabled';
 	};
 
-	const handlerSignIn = () => {
-		signInWithEmailAndPassword(auth, email, password)
-			.then((user) => {
-				localStorage.setItem('Token', auth.currentUser.accessToken);
-				popUpRender('<strong>You\'ve successfully sign in!</strong>')
-				navigate('/');
-			})
-			.catch((error) => {
-				const errorCode = error.code;
-				if (errorCode === 'auth/wrong-password') {
-					setPasswordErr((passwordErr = true));
-				}
-				if (errorCode === 'auth/user-not-found') {
-					setEmailErr('User with such email wasn\'t registered');
-				}
-			});
+	const handlerSignIn = async () => {
+		try {
+			await signInWithEmailAndPassword(auth, email, password);
+
+			localStorage.setItem('Token', auth.currentUser.accessToken);
+			localStorage.setItem('Email', email);
+			popUpRender('SignIn');
+			navigate('/');
+		} catch (error) {
+			const errorCode = error.code;
+			if (errorCode === 'auth/wrong-password') {
+				setPasswordErr((passwordErr = true));
+			}
+			if (errorCode === 'auth/user-not-found') {
+				setEmailErr("User with such email wasn't registered");
+			}
+		}
 	};
 
 	return (

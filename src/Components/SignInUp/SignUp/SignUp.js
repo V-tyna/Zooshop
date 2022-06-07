@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { auth } from '../../../index';
-import './SignUp.css';
 import {
 	validateEmail,
 	validatePassword,
 	validateRepeatedPassword,
 } from '../../../helpers/Validation';
 import { popUpRender } from '../../../helpers/popUpRender';
-import { useNavigate } from 'react-router-dom';
+import './SignUp.css';
 
 const SignUp = () => {
 	const [email, setEmail] = useState(null);
@@ -48,25 +48,21 @@ const SignUp = () => {
 
 	const handlerRegister = async (e) => {
 		try {
-			await createUserWithEmailAndPassword(auth, email, password).then(
-				(userCredential) => {
-					const user = userCredential.user;
+			const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-					localStorage.setItem('Token', user.accessToken);
-					localStorage.setItem('Email', user.email);
-					
-					popUpRender('<strong>You\'ve successfully registered!</strong>')
-				}
-			);
-		} catch (error) {
+			localStorage.setItem('Token', userCredential.user.accessToken);
+			localStorage.setItem('Email', email);
+			
+			popUpRender('Registered')
+				
+		} catch(error) {
 			throw new Error(error.message);
 		}
 
 		try {
-			signInWithEmailAndPassword(auth, email, password).then(() => {
-				navigation('/');
-			});
-		} catch (error) {
+			await signInWithEmailAndPassword(auth, email, password);
+			navigation('/');
+		} catch(error) {
 			throw new Error(error.message);
 		}
 	};

@@ -3,6 +3,9 @@ import { firebaseUrl } from '../../urls/mainUrlDB';
 import './Item.css';
 import { addToFavOrBasket } from '../../helpers/eventListeners';
 
+const writePopItemsToLS = (obj) =>
+localStorage.setItem('Popular items', JSON.stringify(obj));
+
 const Item = () => {
 	const [item, setItem] = useState({});
 
@@ -11,21 +14,21 @@ const Item = () => {
 
 	useEffect(() => {
 		const fetchData = async (url) => {
-			const response = await fetch(url);
-			const data = await response.json();
-			setItem(data);
+			try {
+				const response = await fetch(url);
+				const data = await response.json();
+				setItem(data);
+			} catch (e) {
+				throw new Error('Fetch failed: ', e.message);
+			}
 		};
 
-		fetchData(url).catch((e) => {
-			throw new Error('Fetch failed: ', e.message);
-		});
+		fetchData(url);
 	}, [url]);
 
 	const countPopularItems = () => {
 		const initialObjPopularItems = {};
 		const popItemsObj = JSON.parse(localStorage.getItem('Popular items'));
-		const writePopItemsToLS = (obj) =>
-			localStorage.setItem('Popular items', JSON.stringify(obj));
 
 		if (item.id) {
 			if (!popItemsObj) {

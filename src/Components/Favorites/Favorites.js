@@ -9,10 +9,7 @@ const Favorites = () => {
     const [isDeleted, setIsDeleted] = useState(false);
 
     const favorites = JSON.parse(localStorage.getItem('Favorites'));
-    let favArr;
-    if(favorites) {
-        favArr = Object.values(favorites);
-    }
+    let favArr = favorites ? Object.values(favorites) : [];
 
     let count = 1;
 
@@ -28,7 +25,7 @@ const Favorites = () => {
 
     return ( 
         <div className='user-menu'>
-            <h1>Favourite page</h1>
+            <h1>Favorite page</h1>
             { favorites ? favArr.map(elem => {
                 return (
                     <div id={elem.id} key={elem.id} className='fav-container'>

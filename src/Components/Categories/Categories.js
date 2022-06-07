@@ -11,14 +11,16 @@ const Categories = () => {
 
 	useEffect(() => {
 		const fetchData = async (url) => {
-			const response = await fetch(url);
-			const data = await response.json();
-			setDataFetch(data);
+			try {
+				const response = await fetch(url);
+				const data = await response.json();
+				setDataFetch(data);
+			} catch (e) {
+				throw new Error('Fetch failed: ', e.message);
+			}
 		};
 
-		fetchData(url).catch((e) => {
-			throw new Error('Fetch failed: ', e.message);
-		});
+		fetchData(url);
 	}, [url]);
 
 	return (

@@ -20,12 +20,22 @@ const PopularItems = () => {
 	}
 
 	useEffect(() => {
-		Promise.all(
-			popItems.map(async (el) => {
-				const response = await fetch(firebaseUrl + '/' + el[0] + '.json');
-				return await response.json();
-			})
-		).then((results) => setHits(results));
+		const fetchData = async () => {
+			try {
+				const results = await Promise.all(
+					popItems.map(async (el) => {
+						const response = await fetch(
+							firebaseUrl + '/' + el[0] + '.json'
+						);
+						return await response.json();
+					})
+				);
+				setHits(results);
+			} catch (e) {
+				console.error(e.message);
+			}
+		};
+		fetchData();
 		// eslint-disable-next-line
 	}, []);
 

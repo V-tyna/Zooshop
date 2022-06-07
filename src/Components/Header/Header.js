@@ -15,7 +15,7 @@ const Header = (props) => {
 
     const handlerSignOut = () => {
         auth.signOut();
-        popUpRender('<strong>You\'ve successfully sign out!</strong>');
+        popUpRender('SignOut');
         navigate('/');
         localStorage.clear();
         props.clearFavCount();

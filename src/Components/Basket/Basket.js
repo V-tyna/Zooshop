@@ -11,10 +11,7 @@ const Basket = () => {
     let total = 0;
 
     let basket = JSON.parse(localStorage.getItem('Basket'));
-    let basketArr;
-    if(basket) {
-        basketArr = Object.values(basket);
-    }
+    let basketArr = basket ? Object.values(basket) : [];
 
     const handlerDelete = (e) => {
         const obj = {};
@@ -26,7 +23,7 @@ const Basket = () => {
         setIsDeleted(!isDeleted);
     }
 
-    const handlerQantityPlus = (e) => {
+    const handlerQuantityPlus = (e) => {
         if(basket[e.target.parentNode.parentNode.id].quantity) {
             basket[e.target.parentNode.parentNode.id].quantity++;
         } else {
@@ -36,7 +33,7 @@ const Basket = () => {
         setIsDeleted(!isDeleted);
     }
 
-    const handlerQantityMinus = (e) => {
+    const handlerQuantityMinus = (e) => {
         if(basket[e.target.parentNode.parentNode.id].quantity && basket[e.target.parentNode.parentNode.id].quantity > 1) {
             basket[e.target.parentNode.parentNode.id].quantity--;
         } else {
@@ -62,15 +59,15 @@ const Basket = () => {
                         </div>
                        <div id={elem.category + '/' + elem.id} className='fav-price-btn'>
                            <p>{elem.quantity ? (price * elem.quantity).toFixed(2).toString() + '$' : elem.price}</p>
-                           <p>Qantity: {elem.quantity || 1}</p>
-                           <button className='plus-minus-btn' onClick={handlerQantityPlus}>+</button>
-                           <button className='plus-minus-btn' onClick={handlerQantityMinus}>-</button>
+                           <p>Quantity: {elem.quantity || 1}</p>
+                           <button className='plus-minus-btn' onClick={handlerQuantityPlus}>+</button>
+                           <button className='plus-minus-btn' onClick={handlerQuantityMinus}>-</button>
                            <button className='watch-btn' onClick={handlerDelete}>Delete</button>
                        </div>
                     </div>
                 )
             }) : null}
-            <p>Totlal: {total.toFixed(2)}$</p>
+            <p>Total: {total.toFixed(2)}$</p>
     </div> 
     );
 }

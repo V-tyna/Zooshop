@@ -11,18 +11,27 @@ const Pagination = () => {
 	let [startFromItem, setStartFromItem] = useState(0);
 	let [update, setUpdate] = useState(false);
 	const [allGoods, setAllGoods] = useState([]);
-	
+
 	const goodsArr = [];
 
 	useEffect(() => {
-		Promise.all(
-			urls.map(async (url) => {
-				const response = await fetch(`${firebaseUrl}${url}.json`);
-				const data =  await response.json();
-				return Object.values(data);
-			})
-		).then((results) => setAllGoods(results))
-		.catch(e => console.error(e.message))
+		const fetchData = async () => {
+			try {
+				const results = await Promise.all(
+					urls.map(async (url) => {
+						const response = await fetch(
+							`${firebaseUrl}${url}.json`
+						);
+						const data = await response.json();
+						return Object.values(data);
+					})
+				);
+				setAllGoods(results);
+			} catch (e) {
+				console.error(e.message);
+			}
+		};
+		fetchData();
 		// eslint-disable-next-line
 	}, []);
 
