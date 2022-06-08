@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './PopularItems.css';
 import { bubbleSort } from '../../helpers/sortingFunction';
 import ItemCard from '../ItemCard/ItemCard';
-import { firebaseUrl } from '../../urls/mainUrlDB';
 import { popItemsByDefault } from '../../urls/popularItemsByDefault';
+import { fetchDataPopItems } from '../../requests/fetchDataPopItems';
 
 const PopularItems = () => {
 	const [hits, setHits] = useState([]);
@@ -20,22 +20,7 @@ const PopularItems = () => {
 	}
 
 	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const results = await Promise.all(
-					popItems.map(async (el) => {
-						const response = await fetch(
-							firebaseUrl + '/' + el[0] + '.json'
-						);
-						return await response.json();
-					})
-				);
-				setHits(results);
-			} catch (e) {
-				console.error(e.message);
-			}
-		};
-		fetchData();
+		fetchDataPopItems(popItems, setHits);
 		// eslint-disable-next-line
 	}, []);
 

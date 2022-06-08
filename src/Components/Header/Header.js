@@ -2,8 +2,9 @@ import React from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import { auth } from '../..';
+import { store } from '../..';
+import { renderPopUpAction } from '../../redux/actions';
 import { setActiveClass } from '../../helpers/setActiveClass';
-import { popUpRender } from '../../helpers/popUpRender';
 import { connect } from 'react-redux';
 import { clearStateAction } from '../../redux/actions';
 import { clearBaskStateType, clearFavStateType } from '../../redux/actionTypes';
@@ -15,7 +16,7 @@ const Header = (props) => {
 
     const handlerSignOut = () => {
         auth.signOut();
-        popUpRender('SignOut');
+        store.dispatch(renderPopUpAction('SignOut'));
         navigate('/');
         localStorage.clear();
         props.clearFavCount();

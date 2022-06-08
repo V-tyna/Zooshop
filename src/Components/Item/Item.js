@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { firebaseUrl } from '../../urls/mainUrlDB';
 import './Item.css';
 import { addToFavOrBasket } from '../../helpers/eventListeners';
+import { fetchDataAndSetState } from '../../requests/fetchData';
 
 const writePopItemsToLS = (obj) =>
 localStorage.setItem('Popular items', JSON.stringify(obj));
@@ -11,19 +12,10 @@ const Item = () => {
 
 	const currentLocation = window.location.pathname;
 	const url = firebaseUrl + currentLocation + '.json';
+	const idItem = `${item.category}/${item.id}`;
 
 	useEffect(() => {
-		const fetchData = async (url) => {
-			try {
-				const response = await fetch(url);
-				const data = await response.json();
-				setItem(data);
-			} catch (e) {
-				throw new Error('Fetch failed: ', e.message);
-			}
-		};
-
-		fetchData(url);
+		fetchDataAndSetState(url, setItem);
 	}, [url]);
 
 	const countPopularItems = () => {
@@ -32,13 +24,13 @@ const Item = () => {
 
 		if (item.id) {
 			if (!popItemsObj) {
-				initialObjPopularItems[item.category + '/' + item.id] = 1;
+				initialObjPopularItems[idItem] = 1;
 				writePopItemsToLS(initialObjPopularItems);
-			} else if (!popItemsObj[item.category + '/' + item.id]) {
-				popItemsObj[item.category + '/' + item.id] = 1;
+			} else if (!popItemsObj[idItem]) {
+				popItemsObj[idItem] = 1;
 				writePopItemsToLS(popItemsObj);
 			} else {
-				popItemsObj[item.category + '/' + item.id] += 1;
+				popItemsObj[idItem] += 1;
 				writePopItemsToLS(popItemsObj);
 			}
 		}
@@ -49,9 +41,9 @@ const Item = () => {
 	const keysVals = item && Object.entries(item);
 
 	return (
-		<div id={item.category + '/' + item.id} className='item'>
+		<div className='item'>
 			<h2>{item.name}</h2>
-			<button className='fav-btn' onClick={addToFavOrBasket}>
+			<button className='fav-btn' onClick={() => addToFavOrBasket(idItem, 'Favorites')}>
 				To Fav
 			</button>
 			<div key={item.id} className='item-container'>
@@ -72,7 +64,7 @@ const Item = () => {
 					return null;
 				})}
 			</div>
-			<button className='buy-btn' onClick={addToFavOrBasket}>
+			<button className='buy-btn' onClick={() => addToFavOrBasket(idItem, 'Basket')}>
 				Buy
 			</button>
 		</div>

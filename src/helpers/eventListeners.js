@@ -1,7 +1,16 @@
-import { firebaseUrl } from '../urls/mainUrlDB';
-import { popUpRender } from './popUpRender';
+import { fetchData } from '../requests/fetchData';
 import { store } from '..';
 import { baskType, favType } from '../redux/actionTypes';
+import { renderPopUpAction } from '../redux/actions';
+
+const keysForLS = {
+	Favorites: 'Favorites',
+	Basket: 'Basket',
+};
+
+const getObjFromLS = (key) => {
+	return JSON.parse(localStorage.getItem(key)) || {};
+};
 
 const writeFavsToLS = (obj, key) =>
 	localStorage.setItem(key, JSON.stringify(obj));
@@ -12,19 +21,23 @@ const dispatchType = (obj, key) => {
 	store.dispatch({ type: type, payload: Object.keys(obj).length });
 };
 
-export const addToFavOrBasket = async (e) => {
-	const response = await fetch(
-		`${firebaseUrl}/${e.target.parentNode.id}.json`
-	);
-	const favObj = await response.json();
+const dispatchPopUp = (key) => {
+	store.dispatch(renderPopUpAction(key));
+};
 
-	const key = e.target.className === 'fav-btn' ? 'Favorites' : 'Basket';
+const getKeyByType = (key) => {
+	return keysForLS[key];
+};
 
-	const objFromLS = JSON.parse(localStorage.getItem(key)) || {};
+export const addToFavOrBasket = async (id, keyType) => {
+	const favObj = await fetchData(id);
+	const key = getKeyByType(keyType);
+
+	const objFromLS = getObjFromLS(key);
 
 	objFromLS[favObj.id] = favObj;
 	writeFavsToLS(objFromLS, key);
 	dispatchType(objFromLS, key);
 
-	popUpRender(key);
+	dispatchPopUp(key);
 };

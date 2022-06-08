@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import './SignIn.css';
+import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import './SignIn.css';
 import { auth } from '../../../index';
+import { store } from '../../../index';
+import { renderPopUpAction } from '../../../redux/actions';
 import { validateEmail } from '../../../helpers/Validation';
 import { validatePassword } from '../../../helpers/Validation';
-import { popUpRender } from '../../../helpers/popUpRender';
-import { useNavigate } from 'react-router-dom';
+
 
 const SignIn = () => {
 	let [email, setEmail] = useState(null);
@@ -47,7 +49,7 @@ const SignIn = () => {
 
 			localStorage.setItem('Token', auth.currentUser.accessToken);
 			localStorage.setItem('Email', email);
-			popUpRender('SignIn');
+			store.dispatch(renderPopUpAction('SignIn'));
 			navigate('/');
 		} catch (error) {
 			const errorCode = error.code;

@@ -11,16 +11,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.pop-up { 
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 350px;
-  height: 50px;
-  color: white;
-  text-align: center;
-  align-self: center;
-  border-radius: 10px;
-  background-color: rgb(228, 225, 53);
-}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ItemCard from '../ItemCard/ItemCard';
 import './Categories.css';
 import { firebaseUrl } from '../../urls/mainUrlDB';
+import { fetchDataAndSetState } from '../../requests/fetchData';
 
 const Categories = () => {
 	const currentLocation = window.location.pathname;
@@ -10,17 +11,7 @@ const Categories = () => {
 	let [dataFetch, setDataFetch] = useState({});
 
 	useEffect(() => {
-		const fetchData = async (url) => {
-			try {
-				const response = await fetch(url);
-				const data = await response.json();
-				setDataFetch(data);
-			} catch (e) {
-				throw new Error('Fetch failed: ', e.message);
-			}
-		};
-
-		fetchData(url);
+		fetchDataAndSetState(url, setDataFetch);
 	}, [url]);
 
 	return (

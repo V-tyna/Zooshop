@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './Pagination.css';
 import ItemCard from '../../ItemCard/ItemCard';
-import { firebaseUrl } from '../../../urls/mainUrlDB';
-import { urls } from '../../../urls/allUrlsFromDB';
+import { fetchDataPromiseAll } from '../../../requests/promiseAllFetchData';
 
 let pageNext = 1;
 
@@ -15,23 +14,7 @@ const Pagination = () => {
 	const goodsArr = [];
 
 	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const results = await Promise.all(
-					urls.map(async (url) => {
-						const response = await fetch(
-							`${firebaseUrl}${url}.json`
-						);
-						const data = await response.json();
-						return Object.values(data);
-					})
-				);
-				setAllGoods(results);
-			} catch (e) {
-				console.error(e.message);
-			}
-		};
-		fetchData();
+		fetchDataPromiseAll(setAllGoods);
 		// eslint-disable-next-line
 	}, []);
 

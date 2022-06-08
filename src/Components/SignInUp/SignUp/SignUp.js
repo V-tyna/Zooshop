@@ -5,12 +5,13 @@ import {
 	signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { auth } from '../../../index';
+import { store } from '../../../index';
+import { renderPopUpAction } from '../../../redux/actions';
 import {
 	validateEmail,
 	validatePassword,
 	validateRepeatedPassword,
 } from '../../../helpers/Validation';
-import { popUpRender } from '../../../helpers/popUpRender';
 import './SignUp.css';
 
 const SignUp = () => {
@@ -53,7 +54,7 @@ const SignUp = () => {
 			localStorage.setItem('Token', userCredential.user.accessToken);
 			localStorage.setItem('Email', email);
 			
-			popUpRender('Registered');
+			store.dispatch(renderPopUpAction('Registered'));
 				
 			await signInWithEmailAndPassword(auth, email, password);
 			navigation('/');

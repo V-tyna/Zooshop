@@ -6,17 +6,16 @@ import { addToFavOrBasket } from '../../helpers/eventListeners';
 const ItemCard = (props) => {
 	const navigate = useNavigate();
 
-	const handlerWatchItem = (e) => {
-		navigate(`/${e.target.parentNode.id}`);
+	const propId = `${props.data.category}/${props.data.id}`;
+
+	const handlerWatchItem = (id) => {
+		navigate(`/${id}`);
 	};
 
 	return (
-		<div
-			className='item-card'
-			id={props.data.category + '/' + props.data.id}
-		>
+		<div className='item-card'>
 			<h3>{props.data.name}</h3>
-			<button className='fav-btn' onClick={addToFavOrBasket}>
+			<button className='fav-btn' onClick={() => addToFavOrBasket( propId, 'Favorites')}>
 				To Fav
 			</button>
 			<div>
@@ -27,10 +26,10 @@ const ItemCard = (props) => {
 				/>
 				<p>Price: {props.data.price}</p>
 			</div>
-			<button className='watch-btn' onClick={handlerWatchItem}>
+			<button className='watch-btn' onClick={() => handlerWatchItem(propId)}>
 				Watch more
 			</button>
-			<button className='buy-btn' onClick={addToFavOrBasket}>
+			<button className='buy-btn' onClick={() => addToFavOrBasket(propId, 'Basket')}>
 				Buy
 			</button>
 		</div>

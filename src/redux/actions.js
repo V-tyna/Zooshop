@@ -1,4 +1,4 @@
-import { baskType, favType } from './actionTypes';
+import { baskType, favType, popUpType } from './actionTypes';
 
 export const favoritesAction = (num) => {
     return {
@@ -17,5 +17,12 @@ export const basketAction = (num) => {
 export const clearStateAction = (type) => {
     return {
         type: type
+    }
+}
+
+export const renderPopUpAction = (key) => {
+    return {
+        type: popUpType,
+        payload: key
     }
 }

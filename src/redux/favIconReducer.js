@@ -4,7 +4,7 @@ const countFromLS = Object.keys(JSON.parse(localStorage.getItem('Favorites')) ||
 
 const initialState = {
     favCounter: countFromLS || 0
-}
+};
 
 export const favIconReducer = (state = initialState, action) => {
     if(action.type === favType) {

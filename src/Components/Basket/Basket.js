@@ -13,9 +13,9 @@ const Basket = () => {
     let basket = JSON.parse(localStorage.getItem('Basket'));
     let basketArr = basket ? Object.values(basket) : [];
 
-    const handlerDelete = (e) => {
+    const handlerDelete = (id) => {
         const obj = {};
-        basketArr = basketArr.filter(elem => elem.id !== e.target.parentNode.parentNode.id);  
+        basketArr = basketArr.filter(elem => elem.id !== id);  
         basketArr.forEach(elem => obj[elem.id] = elem);
 
         localStorage.setItem('Basket', JSON.stringify(obj));
@@ -23,21 +23,21 @@ const Basket = () => {
         setIsDeleted(!isDeleted);
     }
 
-    const handlerQuantityPlus = (e) => {
-        if(basket[e.target.parentNode.parentNode.id].quantity) {
-            basket[e.target.parentNode.parentNode.id].quantity++;
+    const handlerQuantityPlus = (id) => {
+        if(basket[id].quantity) {
+            basket[id].quantity++;
         } else {
-            basket[e.target.parentNode.parentNode.id].quantity = 2;
+            basket[id].quantity = 2;
         }
         localStorage.setItem('Basket', JSON.stringify(basket));
         setIsDeleted(!isDeleted);
     }
 
-    const handlerQuantityMinus = (e) => {
-        if(basket[e.target.parentNode.parentNode.id].quantity && basket[e.target.parentNode.parentNode.id].quantity > 1) {
-            basket[e.target.parentNode.parentNode.id].quantity--;
+    const handlerQuantityMinus = (id) => {
+        if(basket[id].quantity && basket[id].quantity > 1) {
+            basket[id].quantity--;
         } else {
-            delete basket[e.target.parentNode.parentNode.id];
+            delete basket[id];
             store.dispatch(basketAction(Object.keys(basket).length));
         }
         localStorage.setItem('Basket', JSON.stringify(basket));  
@@ -51,18 +51,18 @@ const Basket = () => {
             const price =  +elem.price.replace('$', '').replace(',', '.');
             total += elem.quantity ? price * elem.quantity : price;
                 return (
-                    <div id={elem.id} key={elem.id} className='fav-container'>
+                    <div key={elem.id} className='fav-container'>
                         <div className='fav-img-name'>
                             <p>{count++}.</p>
                             <img src={elem.image} alt={elem.name} />
                             <p>{elem.name} </p>   
                         </div>
-                       <div id={elem.category + '/' + elem.id} className='fav-price-btn'>
+                       <div className='fav-price-btn'>
                            <p>{elem.quantity ? (price * elem.quantity).toFixed(2).toString() + '$' : elem.price}</p>
                            <p>Quantity: {elem.quantity || 1}</p>
-                           <button className='plus-minus-btn' onClick={handlerQuantityPlus}>+</button>
-                           <button className='plus-minus-btn' onClick={handlerQuantityMinus}>-</button>
-                           <button className='watch-btn' onClick={handlerDelete}>Delete</button>
+                           <button className='plus-minus-btn' onClick={() => handlerQuantityPlus(elem.id)}>+</button>
+                           <button className='plus-minus-btn' onClick={() => handlerQuantityMinus(elem.id)}>-</button>
+                           <button className='watch-btn' onClick={() => handlerDelete(elem.id)}>Delete</button>
                        </div>
                     </div>
                 )
