@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { firebaseUrl } from '../../urls/mainUrlDB';
+import { firebaseUrl } from '../../configs/urls/mainUrlDB';
 import './Item.css';
 import { addToFavOrBasket } from '../../helpers/eventListeners';
-import { fetchDataAndSetState } from '../../requests/fetchData';
+import { fetchDataAndSetState } from '../../API/fetchData';
 
 const writePopItemsToLS = (obj) =>
 localStorage.setItem('Popular items', JSON.stringify(obj));

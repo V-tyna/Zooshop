@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ItemCard from '../ItemCard/ItemCard';
 import './Categories.css';
-import { firebaseUrl } from '../../urls/mainUrlDB';
-import { fetchDataAndSetState } from '../../requests/fetchData';
+import { firebaseUrl } from '../../configs/urls/mainUrlDB';
+import { fetchDataAndSetState } from '../../API/fetchData';
 
 const Categories = () => {
 	const currentLocation = window.location.pathname;

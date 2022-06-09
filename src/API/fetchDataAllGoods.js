@@ -1,7 +1,7 @@
-import { firebaseUrl } from '../urls/mainUrlDB';
-import { urls } from '../urls/allUrlsFromDB';
+import { firebaseUrl } from '../configs/urls/mainUrlDB';
+import { urls } from '../configs/urls/allUrlsFromDB';
 
-export const fetchDataPromiseAll = async (funcSetState) => {
+export const fetchDataAllGoods = async (funcSetState) => {
     try {
         const results = await Promise.all(
             urls.map(async (url) => {

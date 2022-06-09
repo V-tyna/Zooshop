@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { firebaseConfig } from './configs';
+import { firebaseConfig } from './configs/configs';
 
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -19,7 +19,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 onAuthStateChanged(auth, () => {});
 
-export const store = configureStore({reducer: unitedReducers})
+export const store = configureStore({reducer: unitedReducers});
 
 root.render(
 	<Provider store={store}>

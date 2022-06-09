@@ -1,11 +1,12 @@
-import { fetchData } from '../requests/fetchData';
+import { fetchDataForOneItem } from '../API/fetchData';
 import { store } from '..';
 import { baskType, favType } from '../redux/actionTypes';
 import { renderPopUpAction } from '../redux/actions';
 
-const keysForLS = {
-	Favorites: 'Favorites',
-	Basket: 'Basket',
+
+const keys = {
+	favorites: 'Favorites',
+	basket: 'Basket',
 };
 
 const getObjFromLS = (key) => {
@@ -16,7 +17,7 @@ const writeFavsToLS = (obj, key) =>
 	localStorage.setItem(key, JSON.stringify(obj));
 
 const dispatchType = (obj, key) => {
-	const type = key === 'Favorites' ? favType : baskType;
+	const type = key === keys.favorites ? favType : baskType;
 
 	store.dispatch({ type: type, payload: Object.keys(obj).length });
 };
@@ -26,11 +27,12 @@ const dispatchPopUp = (key) => {
 };
 
 const getKeyByType = (key) => {
-	return keysForLS[key];
+	return keys[key];
 };
 
 export const addToFavOrBasket = async (id, keyType) => {
-	const favObj = await fetchData(id);
+
+	const favObj = await fetchDataForOneItem(id);
 	const key = getKeyByType(keyType);
 
 	const objFromLS = getObjFromLS(key);

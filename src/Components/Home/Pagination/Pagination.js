@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './Pagination.css';
 import ItemCard from '../../ItemCard/ItemCard';
-import { fetchDataPromiseAll } from '../../../requests/promiseAllFetchData';
-
-let pageNext = 1;
+import { fetchDataAllGoods } from '../../../API/fetchDataAllGoods';
 
 const Pagination = () => {
-	let [page, setPage] = useState(1);
+	let [currentPage, setCurrentPage] = useState(1);
 	let [startFromItem, setStartFromItem] = useState(0);
 	let [update, setUpdate] = useState(false);
 	const [allGoods, setAllGoods] = useState([]);
@@ -14,37 +12,37 @@ const Pagination = () => {
 	const goodsArr = [];
 
 	useEffect(() => {
-		fetchDataPromiseAll(setAllGoods);
+		fetchDataAllGoods(setAllGoods);
 		// eslint-disable-next-line
 	}, []);
 
-	const getAndPushEachItemToArr = (arr) => {
+	const spreadEachItemIntoArr = (arr) => {
 		arr.forEach((data) => {
 			if (!Array.isArray(data)) {
 				goodsArr.push(data);
 			} else {
-				return getAndPushEachItemToArr(data);
+				return spreadEachItemIntoArr(data);
 			}
 		});
 	};
 
-	getAndPushEachItemToArr(allGoods);
+	spreadEachItemIntoArr(allGoods);
 
-	const limitItemsPerOnePage = 8;
-	const countPages = Math.ceil(goodsArr.length / limitItemsPerOnePage);
+	const LIMIT_ITEMS_PER_PAGE = 8;
+	const countPages = Math.ceil(goodsArr.length / LIMIT_ITEMS_PER_PAGE);
 	const startFromItemTheLastPage =
 		goodsArr.length -
-		(goodsArr.length % Math.floor(goodsArr.length / limitItemsPerOnePage));
+		(goodsArr.length % Math.floor(goodsArr.length / LIMIT_ITEMS_PER_PAGE));
 
 	const itemsForPage = goodsArr.slice(
 		startFromItem,
-		startFromItem + limitItemsPerOnePage
+		startFromItem + LIMIT_ITEMS_PER_PAGE
 	);
 
 	const handlerNextPage = () => {
-		if (page < countPages) {
-			setPage(++pageNext);
-			setStartFromItem(startFromItem + limitItemsPerOnePage);
+		if (currentPage < countPages) {
+			setCurrentPage(++currentPage);
+			setStartFromItem(startFromItem + LIMIT_ITEMS_PER_PAGE);
 		} else {
 			setStartFromItem(startFromItemTheLastPage);
 		}
@@ -52,9 +50,9 @@ const Pagination = () => {
 	};
 
 	const handlerPrevPage = () => {
-		if (page > 1) {
-			setPage(--pageNext);
-			setStartFromItem(startFromItem - limitItemsPerOnePage);
+		if (currentPage > 1) {
+			setCurrentPage(--currentPage);
+			setStartFromItem(startFromItem - LIMIT_ITEMS_PER_PAGE);
 		} else {
 			setStartFromItem(0);
 		}
@@ -71,7 +69,7 @@ const Pagination = () => {
 				</button>
 				<p>
 					{' '}
-					Page: <strong>{page}</strong> from{' '}
+					Page: <strong>{currentPage}</strong> from{' '}
 					<strong>{countPages}</strong>
 				</p>
 				<button className='prev-next' onClick={handlerNextPage}>

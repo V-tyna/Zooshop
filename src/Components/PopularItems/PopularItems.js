@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './PopularItems.css';
 import { bubbleSort } from '../../helpers/sortingFunction';
 import ItemCard from '../ItemCard/ItemCard';
-import { popItemsByDefault } from '../../urls/popularItemsByDefault';
-import { fetchDataPopItems } from '../../requests/fetchDataPopItems';
+import { popItemsByDefault } from '../../configs/urls/popularItemsByDefault';
+import { fetchDataPopItems } from '../../API/fetchDataPopItems';
 
 const PopularItems = () => {
 	const [hits, setHits] = useState([]);

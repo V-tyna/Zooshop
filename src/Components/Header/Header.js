@@ -8,6 +8,7 @@ import { setActiveClass } from '../../helpers/setActiveClass';
 import { connect } from 'react-redux';
 import { clearStateAction } from '../../redux/actions';
 import { clearBaskStateType, clearFavStateType } from '../../redux/actionTypes';
+import Search from '../Search/Search';
 
 const Header = (props) => {
     const navigate = useNavigate();
@@ -53,10 +54,9 @@ const Header = (props) => {
                     </div>
                 </div>
                 <div id='search-sign-section'>
-                    <div className='search'>
-                        <input type='search' placeholder='Search'/>
-                        <button> Search </button>
-                    </div>
+
+                    <Search />
+                    
                     <div className='user-fav-basket'>
                         <Link className='user-link' to='/user_profile'>User</Link>
                         <Link className='user-link' to='/favorites'>

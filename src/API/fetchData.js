@@ -1,4 +1,4 @@
-import { firebaseUrl } from "../urls/mainUrlDB";
+import { firebaseUrl } from '../configs/urls/mainUrlDB';
 
 export const fetchDataAndSetState = async (url, funcSetState) => {
     try {
@@ -10,7 +10,7 @@ export const fetchDataAndSetState = async (url, funcSetState) => {
     }
 };
 
-export const fetchData = async (id) => {
+export const fetchDataForOneItem = async (id) => {
 	const response = await fetch(
 		`${firebaseUrl}/${id}.json`
 	);

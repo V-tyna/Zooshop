@@ -27,7 +27,7 @@ const SignIn = () => {
 		e.preventDefault();
 	};
 
-	const handlerInputEmail = (e) => {
+	const handleEmail = (e) => {
 		clearingErrNotification();
 		setEmail((email = e.target.value));
 		e.target.className = validateEmail(e.target.value)
@@ -35,7 +35,7 @@ const SignIn = () => {
 			: 'disabled';
 	};
 
-	const handlerInputPassword = (e) => {
+	const handlePassword = (e) => {
 		clearingErrNotification();
 		setPassword((password = e.target.value));
 		e.target.className = validatePassword(e.target.value)
@@ -43,7 +43,7 @@ const SignIn = () => {
 			: 'disabled';
 	};
 
-	const handlerSignIn = async () => {
+	const handleSignIn = async () => {
 		try {
 			await signInWithEmailAndPassword(auth, email, password);
 
@@ -74,7 +74,7 @@ const SignIn = () => {
 					name='email'
 					type='text'
 					placeholder='Email'
-					onChange={handlerInputEmail}
+					onChange={handleEmail}
 					required
 				/>
 				<div className='password-label-container'>
@@ -85,10 +85,10 @@ const SignIn = () => {
 					name='password'
 					type='password'
 					placeholder='Password'
-					onChange={handlerInputPassword}
+					onChange={handlePassword}
 					required
 				/>
-				<button type='submit' onClick={handlerSignIn}>
+				<button type='submit' onClick={handleSignIn}>
 					Sign in
 				</button>
 			</form>

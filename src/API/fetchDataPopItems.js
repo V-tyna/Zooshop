@@ -1,4 +1,4 @@
-import { firebaseUrl } from "../urls/mainUrlDB";
+import { firebaseUrl } from '../configs/urls/mainUrlDB';
 
 export const fetchDataPopItems = async (arr, funcSetState) => {
     try {

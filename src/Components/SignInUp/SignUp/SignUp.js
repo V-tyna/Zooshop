@@ -15,28 +15,28 @@ import {
 import './SignUp.css';
 
 const SignUp = () => {
-	const [email, setEmail] = useState(null);
-	const [password, setPassword] = useState(null);
-	const [, setRepeatPassword] = useState(null);
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [repeatedPassword, setRepeatPassword] = useState('');
 	const [disableStatus, setDisableStatus] = useState(true);
 
 	const navigation = useNavigate();
 
-	const handlerInputEmail = (e) => {
+	const handleEmail = (e) => {
 		setEmail(e.target.value);
 		e.target.className = validateEmail(e.target.value)
 			? 'enabled'
 			: 'disabled';
 	};
 
-	const handlerInputPassword = (e) => {
+	const handlePassword = (e) => {
 		setPassword(e.target.value);
 		e.target.className = validatePassword(e.target.value)
 			? 'enabled'
 			: 'disabled';
 	};
 
-	const handlerInputRepeatPassword = (e) => {
+	const handleRepeatPassword = (e) => {
 		setRepeatPassword(e.target.value);
 		e.target.className = validateRepeatedPassword(password, e.target.value)
 			? 'enabled'
@@ -47,7 +47,7 @@ const SignUp = () => {
 			: setDisableStatus(true);
 	};
 
-	const handlerRegister = async (e) => {
+	const handleRegister = async (e) => {
 		try {
 			const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
@@ -73,32 +73,35 @@ const SignUp = () => {
 			<form className='register-form' onSubmit={handleSubmit}>
 				<label htmlFor='email'>Email:</label>
 				<input
+					value={email}
 					name='email'
 					type='text'
 					placeholder='Email'
-					onChange={handlerInputEmail}
+					onChange={handleEmail}
 					required
 				/>
 				<label htmlFor='password'>Password:</label>
 				<input
+					value={password}
 					name='password'
 					type='password'
 					placeholder='Password'
-					onChange={handlerInputPassword}
+					onChange={handlePassword}
 					required
 				/>
 				<label htmlFor='repeatPassword'>Repeat password:</label>
 				<input
+					value={repeatedPassword}
 					name='repeatPassword'
 					type='password'
 					placeholder='Repeat Password'
-					onChange={handlerInputRepeatPassword}
+					onChange={handleRepeatPassword}
 					required
 				/>
 				<button
 					id='register-btn'
 					type='submit'
-					onClick={handlerRegister}
+					onClick={handleRegister}
 					disabled={disableStatus}
 				>
 					Register

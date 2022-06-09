@@ -26,7 +26,9 @@ function App() {
 
 	store.subscribe(() => {
 		const popUp = store.getState().popUpReducer.keyPop;
+
 		setKeyForPopUpComponent(popUp);
+		
 		if (popUp) {
 			setIsPopUp(true);
 		}
