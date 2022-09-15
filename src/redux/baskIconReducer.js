@@ -1,7 +1,7 @@
 import { baskType, clearBaskStateType } from './actionTypes';
 
 const countFromLS = Object.keys(
-	JSON.parse(localStorage.getItem('Basket')) || {}
+	JSON.parse(localStorage.getItem('basket')) || {}
 ).length;
 
 const initialState = {
