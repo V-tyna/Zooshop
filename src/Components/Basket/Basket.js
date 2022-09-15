@@ -10,7 +10,7 @@ const Basket = () => {
     let count = 1;
     let total = 0;
 
-    let basket = JSON.parse(localStorage.getItem('Basket'));
+    let basket = JSON.parse(localStorage.getItem('basket'));
     let basketArr = basket ? Object.values(basket) : [];
 
     const handlerDelete = (id) => {
@@ -18,7 +18,7 @@ const Basket = () => {
         basketArr = basketArr.filter(elem => elem.id !== id);  
         basketArr.forEach(elem => obj[elem.id] = elem);
 
-        localStorage.setItem('Basket', JSON.stringify(obj));
+        localStorage.setItem('basket', JSON.stringify(obj));
         store.dispatch(basketAction(basketArr.length));
         setIsDeleted(!isDeleted);
     }
@@ -29,7 +29,7 @@ const Basket = () => {
         } else {
             basket[id].quantity = 2;
         }
-        localStorage.setItem('Basket', JSON.stringify(basket));
+        localStorage.setItem('basket', JSON.stringify(basket));
         setIsDeleted(!isDeleted);
     }
 
@@ -40,7 +40,7 @@ const Basket = () => {
             delete basket[id];
             store.dispatch(basketAction(Object.keys(basket).length));
         }
-        localStorage.setItem('Basket', JSON.stringify(basket));  
+        localStorage.setItem('basket', JSON.stringify(basket));  
         setIsDeleted(!isDeleted);
     }
 

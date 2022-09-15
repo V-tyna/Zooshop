@@ -2,8 +2,8 @@ import React from 'react';
 import './PopUp.css';
 
 const phrases = {
-	'Favorites': 'Item was added to Favorites!',
-	'Basket': 'Item was added to the Basket!',
+	'favorites': 'Item was added to Favorites!',
+	'basket': 'Item was added to the Basket!',
 	'SignOut': 'You\'ve successfully sign out!',
 	'SignIn': 'You\'ve successfully sign in!',
 	'Registered': 'You\'ve successfully registered!',

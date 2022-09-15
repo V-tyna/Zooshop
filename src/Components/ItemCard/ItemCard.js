@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ItemCard.css';
 import { addToFavOrBasket } from '../../helpers/eventListeners';
+import { keys } from '../../helpers/keyTypes';
 
 const ItemCard = (props) => {
 	const navigate = useNavigate();
@@ -15,7 +16,7 @@ const ItemCard = (props) => {
 	return (
 		<div className='item-card'>
 			<h3>{props.data.name}</h3>
-			<button className='fav-btn' onClick={() => addToFavOrBasket( propId, 'Favorites')}>
+			<button className='fav-btn' onClick={() => addToFavOrBasket( propId, keys.favorites)}>
 				To Fav
 			</button>
 			<div>
@@ -29,7 +30,7 @@ const ItemCard = (props) => {
 			<button className='watch-btn' onClick={() => handlerWatchItem(propId)}>
 				Watch more
 			</button>
-			<button className='buy-btn' onClick={() => addToFavOrBasket(propId, 'Basket')}>
+			<button className='buy-btn' onClick={() => addToFavOrBasket(propId, keys.basket)}>
 				Buy
 			</button>
 		</div>

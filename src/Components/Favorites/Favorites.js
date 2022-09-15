@@ -3,12 +3,13 @@ import { store } from '../..';
 import { addToFavOrBasket } from '../../helpers/eventListeners';
 import './Favorites.css';
 import { favoritesAction } from '../../redux/actions';
+import { keys } from '../../helpers/keyTypes';
 
 const Favorites = () => {
 
     const [isDeleted, setIsDeleted] = useState(false);
 
-    const favorites = JSON.parse(localStorage.getItem('Favorites'));
+    const favorites = JSON.parse(localStorage.getItem('favorites'));
     let favArr = favorites ? Object.values(favorites) : [];
 
     let count = 1;
@@ -18,7 +19,7 @@ const Favorites = () => {
         favArr = favArr.filter(elem => elem.id !== id);  
         favArr.map(elem => obj[elem.id] = elem);
 
-        localStorage.setItem('Favorites', JSON.stringify(obj));
+        localStorage.setItem('favorites', JSON.stringify(obj));
         store.dispatch(favoritesAction(favArr.length));
         setIsDeleted(!isDeleted);
     }
@@ -36,7 +37,7 @@ const Favorites = () => {
                         </div>
                        <div className='fav-price-btn'>
                            <p>{elem.price}</p>
-                           <button className='buy-btn' onClick={() => addToFavOrBasket(`${elem.category}/${elem.id}`, 'Basket')}>Buy</button>
+                           <button className='buy-btn' onClick={() => addToFavOrBasket(`${elem.category}/${elem.id}`, keys.basket)}>Buy</button>
                            <button className='watch-btn' onClick={() => handlerDelete(elem.id)}>Delete</button>
                        </div>
                     </div>

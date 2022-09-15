@@ -1,6 +1,6 @@
 import { clearFavStateType, favType } from './actionTypes';
 
-const countFromLS = Object.keys(JSON.parse(localStorage.getItem('Favorites')) || {}).length;
+const countFromLS = Object.keys(JSON.parse(localStorage.getItem('favorites')) || {}).length;
 
 const initialState = {
     favCounter: countFromLS || 0

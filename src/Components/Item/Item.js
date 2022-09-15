@@ -3,6 +3,7 @@ import { firebaseUrl } from '../../configs/urls/mainUrlDB';
 import './Item.css';
 import { addToFavOrBasket } from '../../helpers/eventListeners';
 import { fetchDataAndSetState } from '../../API/fetchData';
+import { keys } from '../../helpers/keyTypes';
 
 const writePopItemsToLS = (obj) =>
 localStorage.setItem('Popular items', JSON.stringify(obj));
@@ -43,7 +44,7 @@ const Item = () => {
 	return (
 		<div className='item'>
 			<h2>{item.name}</h2>
-			<button className='fav-btn' onClick={() => addToFavOrBasket(idItem, 'Favorites')}>
+			<button className='fav-btn' onClick={() => addToFavOrBasket(idItem, keys.favorites)}>
 				To Fav
 			</button>
 			<div key={item.id} className='item-container'>
@@ -64,7 +65,7 @@ const Item = () => {
 					return null;
 				})}
 			</div>
-			<button className='buy-btn' onClick={() => addToFavOrBasket(idItem, 'Basket')}>
+			<button className='buy-btn' onClick={() => addToFavOrBasket(idItem, keys.basket)}>
 				Buy
 			</button>
 		</div>
